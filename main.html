@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelIA</title>
+    <title>Mi Primera Página Web</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -72,13 +72,72 @@
                 <input type="number" id="presupuesto" name="presupuesto" required placeholder="Ej. 1000" min="0">
                 <br><br>
 
+                <label for="tipo-viaje">Tipo de viaje:</label>
+                <select id="tipo-viaje" name="tipo-viaje" required>
+                    <option value="Relajacion">Relajacion</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Historico">Historico</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Espiritual">Espiritual</option>
+                    <option value="Gastronomico">Espiritual</option>
+                </select>
+                <br><br>
+
                 <button type="Enviar">Enviar</button>
             </form>
         </div>
+        
+        <div id="recomendaciones" class="cards-container"></div>
+
     </main> 
 
-    <footer>
-        <p>&copy; Equipo #n xd</p>
-    </footer>
+    <script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Evita el envío del formulario
+
+        // Desplazar el formulario hacia la izquierda
+        const formContainer = document.querySelector(".form-container");
+        formContainer.classList.add("slide-left");
+
+        // Generar recomendaciones
+        const recomendaciones = [
+            {
+                ubicacion: "Barcelona, España",
+                tipo: "Relajacion",
+                precio: "1200",
+                img: "./img/img1.jpg"
+            },
+            {
+                ubicacion: "Amazonas, Brasil",
+                tipo: "Aventura",
+                precio: "800",
+                img: "./img/icon1.png"
+            },
+            {
+                ubicacion: "Maldivas",
+                tipo: "Gastronomico",
+                precio: "2000",
+                img: "./img/icon3.png"
+            }
+        ];
+
+        // Esperar a que termine el desplazamiento del formulario antes de mostrar las tarjetas
+        setTimeout(() => {
+            const recomendacionesContainer = document.getElementById("recomendaciones");
+
+            // Generar dinámicamente las tarjetas
+            recomendacionesContainer.innerHTML = recomendaciones.map(recom => `
+                <div class="card">
+                    <h2>${recom.ubicacion}</h2>
+                    <p>Tipo de viaje: ${recom.tipo}</p>
+                    <p>Precio: $${recom.precio}</p>
+                </div>
+            `).join("");
+
+            // Mostrar las tarjetas con animación
+            recomendacionesContainer.classList.add("visible");
+        }, 1000); // Espera 1 segundo (la duración de la animación del formulario)
+    });
+    </script>
 </body>
 </html>
