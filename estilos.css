@@ -24,8 +24,8 @@ header {
 
 header h1 {
     font-size: 2.5em;
-    margin: 0;
-    color: white;
+    margin: 40px;
+    color: black;
 }
 
 nav ul {
@@ -37,11 +37,12 @@ nav ul {
 
 nav li {
     margin-left: 20px;
+    color: black
 }
 
 nav a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 1.1em;
 }
 
@@ -66,9 +67,9 @@ img {
 .cards-container {
     display: flex;
     justify-content: center;
-    margin-top: -100px; /* Hace que las tarjetas se desplacen hacia arriba */
-    z-index: 2;
-    position: relative;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
     gap: 20px; /* Espacio entre tarjetas */
 }
 
@@ -77,15 +78,14 @@ img {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 250px;
-    height: 250px; /* Aumento la altura de las tarjetas para que quepan los iconos */
-    padding: 30px;
+    height: 250px;
+    padding: 20px;
     text-align: center;
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .card h2 {
@@ -101,23 +101,23 @@ img {
 
 /* Iconos */
 .card-icon {
-    width: 60px;  /* Ajustar tamaño del icono */
-    height: 60px; /* Mantener proporciones de los iconos */
-    object-fit: contain; /* Asegura que los iconos no se distorsionen */
-    margin-bottom: 20px; /* Espacio debajo del icono */
+    width: 60px;  
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 20px;
 }
 
 /* Formulario */
 .form-container {
     background-color: #fff;
     padding: 30px;
+    margin: 20px auto; 
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 20px auto; /* Aumento el margen superior para moverlo hacia abajo */
+    max-width: 400px;
     text-align: center;
-    
 }
+
 
 form {
     display: flex;
@@ -152,13 +152,12 @@ form button:hover {
     background-color: #0056b3;
 }
 
-
 .content {
     padding: 40px 20px;
     text-align: center;
 }
 
-
+/* Footer */
 footer {
     text-align: center;
     background-color: #fff;
@@ -178,8 +177,65 @@ footer p {
     display: flex;
     justify-content: center; 
     text-align: center; 
-    font-family: arial, sans-serif;
+    font-family: Arial, sans-serif;
     color: #666;
     margin-top: 20px;
 }
 
+/* Contenedor del formulario y las tarjetas */
+.form-tarjetas-container {
+    display: flex; 
+    justify-content: flex-start; 
+    align-items: flex-start;
+    position: relative;
+    margin: 40px auto; 
+    max-width: 90%; 
+    gap: 40px; 
+}
+
+/* Desplazar formulario hacia la izquierda */
+.form-container.slide-left {
+    animation: slideLeftPartial 1s forwards;
+}
+
+@keyframes slideLeftPartial {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Contenedor de tarjetas dinámicas */
+#recomendaciones {
+    display: flex;
+    flex-direction: column; /* Las tarjetas se apilan en columna */
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    opacity: 0; /* Ocultas inicialmente */
+    transform: translateY(20px); /* Ligeramente hacia abajo */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Transiciones suaves */
+    position: absolute; /* Posición absoluta para alinearlas a la derecha del formulario */
+    top: 740px; /* Se alinean con la parte superior del formulario */
+    left: calc(50% + 40px); /* Se colocan a la derecha del formulario (ajusta el espacio entre ambos) */
+    width: 40%; /* Controla el ancho del contenedor de las cartas */
+}
+
+#recomendaciones.visible {
+    opacity: 1; /* Hacer visibles las tarjetas */
+    transform: translateY(0); /* Volver a la posición original */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-tarjetas-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #recomendaciones {
+        width: 100%;
+    }
+}
