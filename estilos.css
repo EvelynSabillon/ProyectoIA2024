@@ -1,0 +1,185 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    box-sizing: border-box; /* Incluye padding y border en el tamaño de los elementos */
+}
+
+/* Header */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    padding: 30;
+    margin: 50px;
+    display: flex;
+}
+
+nav li {
+    margin-left: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+}
+
+nav a:hover {
+    color: #007bff;
+}
+
+/* Imagen de fondo */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+
+img {
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
+}
+
+/* Contenedor de las tarjetas */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -100px; /* Hace que las tarjetas se desplacen hacia arriba */
+    z-index: 2;
+    position: relative;
+    gap: 20px; /* Espacio entre tarjetas */
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 250px; /* Aumento la altura de las tarjetas para que quepan los iconos */
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Iconos */
+.card-icon {
+    width: 60px;  /* Ajustar tamaño del icono */
+    height: 60px; /* Mantener proporciones de los iconos */
+    object-fit: contain; /* Asegura que los iconos no se distorsionen */
+    margin-bottom: 20px; /* Espacio debajo del icono */
+}
+
+/* Formulario */
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 20px auto; /* Aumento el margen superior para moverlo hacia abajo */
+    text-align: center;
+    
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+form select, form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+
+.content {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+
+footer {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    color: #666;
+    font-size: 1em;
+}
+
+.Instruccion {
+    display: flex;
+    justify-content: center; 
+    text-align: center; 
+    font-family: arial, sans-serif;
+    color: #666;
+    margin-top: 20px;
+}
+

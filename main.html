@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelIA</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>TravelIA</h1>
+        <nav>
+            <ul>
+                <li><a href="inicio">Inicio</a></li>
+                <li><a href="acercade">Acerca de</a></li>
+                <li><a href="contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="image-container">
+            <img src="./img/img1.jpg" alt="Imagen principal">
+        </div>
+
+        <div class="cards-container">
+            <div class="card">
+                <img src="./img/icon1.png" alt="Icono Destinos Populares" class="card-icon">
+                <h2>Destinos Populares</h2>
+                <p>Lugares más visitados o recomendados por la mayoría de las personas.</p>
+            </div>
+            <div class="card">
+                <img src="./img/icon2_.png" alt="Icono Escapadas de Relax" class="card-icon">
+                <h2>Escapadas de Relax</h2>
+                <p>Lugares tranquilos, culturales y de aventura.</p>
+            </div>
+            <div class="card">
+                <img src="./img/icon3.png" alt="Icono Lugares Imperdibles" class="card-icon">
+                <h2>Lugares Imperdibles</h2>
+                <p>Destinos que no te puedes perder, considerando tus preferencias.</p>
+            </div>
+        </div>
+
+        <div class="Instruccion">
+            <p>Ingresa las caracteristicas deseadas para que TravelIA recomiende tu proximo destino. uwu</p>
+        </div>
+
+        <!-- Formulario de búsqueda -->
+        <div class="form-container">
+            <h2>Planifica tu Viaje</h2>
+
+            <!-- Aqui ira la seleccion de las caracteristicas para el modelo. -->
+            <form action="#" method="post">
+                <label for="region">Región:</label>
+                <select id="region" name="region" required>
+                    <option value="Norte America">Norte America</option>
+                    <option value="Centro America">Centro America</option>
+                    <option value="Sudamerica">Sudamerica</option>
+                    <option value="America Insular">America Insular</option>
+                    <option value="Europa">Europa</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+                <br><br>
+
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required placeholder="Ej. España">
+                <br><br>
+
+                <label for="presupuesto">Presupuesto:</label>
+                <input type="number" id="presupuesto" name="presupuesto" required placeholder="Ej. 1000" min="0">
+                <br><br>
+
+                <button type="Enviar">Enviar</button>
+            </form>
+        </div>
+    </main> 
+
+    <footer>
+        <p>&copy; Equipo #n xd</p>
+    </footer>
+</body>
+</html>
