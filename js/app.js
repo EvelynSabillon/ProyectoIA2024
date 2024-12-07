@@ -3,6 +3,8 @@ import TravelRecommender from './model.js';
 
 let recommender = null;
 
+const ACCESS_KEY = '2cmDGYcpKM2Hexq8AZjD2GE34qKwY_l96jxElLXbUEw'; 
+
 // Cargar los datos y centroides
 async function initializeRecommender() {
     try {
@@ -34,6 +36,7 @@ async function initializeRecommender() {
 function setupEventListeners() {
     const regionSelect = document.getElementById('region');
     const paisSelect = document.getElementById('pais');
+    const ciudadSelect = document.getElementById('ciudad');
     const form = document.getElementById('recommendationForm');
 
     // Actualizar países cuando cambia la región
@@ -48,6 +51,22 @@ function setupEventListeners() {
             option.textContent = pais;
             paisSelect.appendChild(option);
         });
+
+        ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad</option>';
+    });
+
+    // Actualizar ciudades cuando cambia el país
+    paisSelect.addEventListener('change', () => {
+        const selectedCountry = paisSelect.value;
+        const ciudades = recommender.getCitiesForCountry(selectedCountry);
+
+        ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad</option>';
+        ciudades.forEach(ciudad => {
+            const option = document.createElement('option');
+            option.value = ciudad;
+            option.textContent = ciudad;
+            ciudadSelect.appendChild(option);
+        });
     });
 
     // Manejar envío del formulario
@@ -58,6 +77,7 @@ function setupEventListeners() {
         const datos = {
             region: formData.get('region'),
             pais: formData.get('pais'),
+            ciudad: formData.get('ciudad'),
             tipoTurismo: formData.get('tipoTurismo'),
             presupuesto: parseFloat(formData.get('presupuesto'))
         };
@@ -70,6 +90,7 @@ function setupEventListeners() {
         const recomendaciones = recommender.recomendar(
             datos.region,
             datos.pais,
+            datos.ciudad,
             datos.tipoTurismo,
             datos.presupuesto
         );
@@ -83,7 +104,27 @@ function setupEventListeners() {
     });
 }
 
-function mostrarRecomendaciones(recomendaciones) {
+
+async function buscarImagenes(lugar) {
+    const url = `https://api.unsplash.com/search/photos?page=1&query=${encodeURIComponent(lugar)}&client_id=${ACCESS_KEY}`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.results.length > 0) {
+            return data.results[0].urls.small; // Retorna la URL de la primera imagen encontrada
+        } else {
+            return './img/placeholder.jpg'; // Imagen predeterminada si no hay resultados
+        }
+    } catch (error) {
+        console.error('Error al buscar imágenes:', error);
+        return './img/placeholder.jpg'; // Imagen predeterminada en caso de error
+    }
+}
+
+
+async function mostrarRecomendaciones(recomendaciones) {
     const container = document.getElementById('recomendaciones');
     container.innerHTML = '';
     
@@ -97,13 +138,14 @@ function mostrarRecomendaciones(recomendaciones) {
         return;
     }
 
-    recomendaciones.forEach(lugar => {
+    // Iterar sobre las recomendaciones
+    for (const lugar of recomendaciones) {
+        // Obtener la imagen del lugar desde la API de Unsplash
+        const imagen = await buscarImagenes(lugar.nombre);
+
+        // Crear la tarjeta de recomendación
         const card = document.createElement('div');
         card.className = 'card-recomendacion';
-        
-        const imagen = lugar.fotoUrl && lugar.fotoUrl !== 'No disponible' 
-            ? lugar.fotoUrl 
-            : './img/placeholder.jpg';
 
         card.innerHTML = `
             <img src="${imagen}" alt="${lugar.nombre}">
@@ -114,10 +156,12 @@ function mostrarRecomendaciones(recomendaciones) {
                 <p>Precio: $${lugar.precio}</p>
             </div>
         `;
-        
-        container.appendChild(card);
-    });
 
+        // Añadir la tarjeta al contenedor
+        container.appendChild(card);
+    }
+
+    // Mostrar el contenedor de recomendaciones
     container.classList.add('visible');
 }
 

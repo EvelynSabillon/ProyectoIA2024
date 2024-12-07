@@ -4,6 +4,7 @@ class TravelRecommender {
         this.data = data;
         this.centroids = centroids;
         this.countryByRegion = this.organizeCountriesByRegion();
+        this.cityByCountry = this.organizeCitiesByCountry();
     }
 
     organizeCountriesByRegion() {
@@ -31,8 +32,37 @@ class TravelRecommender {
         return regionMap;
     }
 
+    organizeCitiesByCountry() {
+        const cityMap = {};
+        this.data.forEach(place => {
+            Object.keys(place).forEach(key => {
+                if (key.startsWith('pais_') && place[key] === 1) {
+                    const country = key.replace('pais_', '');
+                    if (!cityMap[country]) cityMap[country] = new Set();
+
+                    Object.keys(place).forEach(cityKey => {
+                        if (cityKey.startsWith('ciudad_') && place[cityKey] === 1) {
+                            cityMap[country].add(cityKey.replace('ciudad_', ''));
+                        }
+                    });
+                }
+            });
+        });
+
+        // Convertir Sets a arrays ordenados
+        Object.keys(cityMap).forEach(country => {
+            cityMap[country] = Array.from(cityMap[country]).sort();
+        });
+
+        return cityMap;
+    }
+
     getCountriesForRegion(region) {
         return this.countryByRegion[region] || [];
+    }
+
+    getCitiesForCountry(country) {
+        return this.cityByCountry[country] || [];
     }
 
     standardizeFeatures(lugar) {
@@ -74,11 +104,12 @@ class TravelRecommender {
         return closestCluster;
     }
 
-    recomendar(region, pais, tipoTurismo, presupuesto) {
+    recomendar(region, pais, ciudad, tipoTurismo, presupuesto) {
         // Filtrar lugares por región y país
         let filtrados = this.data.filter(lugar => {
             return lugar[`region_${region}`] === 1 && 
                    lugar[`pais_${pais}`] === 1 &&
+                   lugar[`ciudad_${ciudad}`] === 1 &&
                    lugar[tipoTurismo] === 1 &&
                    lugar.Precio <= presupuesto;
         });
