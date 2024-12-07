@@ -75,7 +75,7 @@ header h1 {
 
 .image-container {
     display: flex;
-    width: 600%; /* Ajusta este valor al número total de imágenes * 100% */
+    width: 700%; /* Ajusta este valor al número total de imágenes * 100% */
     animation: slide 45s infinite;
 }
 
