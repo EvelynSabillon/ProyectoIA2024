@@ -110,8 +110,8 @@ class TravelRecommender {
             return lugar[`region_${region}`] === 1 && 
                    lugar[`pais_${pais}`] === 1 &&
                    lugar[`ciudad_${ciudad}`] === 1 &&
-                   lugar[tipoTurismo] === 1 &&
-                   lugar.Precio <= presupuesto;
+                   lugar[tipoTurismo] === 1;
+                   //lugar.Precio <= presupuesto;
         });
 
         if (filtrados.length === 0) {
@@ -132,12 +132,12 @@ class TravelRecommender {
         filtrados.sort((a, b) => b.Calificación - a.Calificación);
 
         for (const lugar of filtrados) {
-            if (!clustersUsados.has(lugar.cluster) && recomendados.length < 3) {
+            if (recomendados.length < 3) {
                 recomendados.push({
                     nombre: lugar.Nombre,
                     tipoTurismo: tipoTurismo,
                     calificacion: lugar.Calificación,
-                    fotoUrl: lugar['Foto URL'],
+                    fotoUrl: lugar.Foto,
                     precio: lugar.Precio
                 });
                 clustersUsados.add(lugar.cluster);
