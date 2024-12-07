@@ -407,17 +407,6 @@ footer p {
 }
 
 
-body {
-    background: linear-gradient(-45deg, #DBF3FA, #B7E9F7, #fbc2eb, #a1c4fd);
-    background-size: 400% 400%;
-    animation: gradientBG 10s ease infinite;
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
 form button:hover {
     transform: scale(1.1);
