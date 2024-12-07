@@ -1,6 +1,6 @@
 /* General */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -30,6 +30,7 @@ header {
     text-transform: uppercase;
     display: flex;
     gap: 2px; /* Espaciado entre letras */
+    margin-left: 30px;
 }
 
 .logo span {
@@ -483,3 +484,40 @@ form button {
     border: none;
 }
 
+body {
+    font-family: "Proxima-Nova", sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    line-height: 1.2;
+  }
+  
+
+  
+  header a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+  }
+  
+  button {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #003366;
+  }
+  
+  footer {
+    background-color: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  
