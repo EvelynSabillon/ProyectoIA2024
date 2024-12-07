@@ -75,6 +75,11 @@ function setupEventListeners() {
         );
 
         mostrarRecomendaciones(recomendaciones);
+
+        //Desplazar el formulario hacia la izquierda
+        const formContainer = document.querySelector('.form-container');
+        formContainer.classList.add('slide-left');
+
     });
 }
 
@@ -94,18 +99,20 @@ function mostrarRecomendaciones(recomendaciones) {
 
     recomendaciones.forEach(lugar => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card-recomendacion';
         
         const imagen = lugar.fotoUrl && lugar.fotoUrl !== 'No disponible' 
             ? lugar.fotoUrl 
             : './img/placeholder.jpg';
 
         card.innerHTML = `
-            <img src="${imagen}" alt="${lugar.nombre}" class="card-icon">
-            <h2>${lugar.nombre}</h2>
-            <p>Tipo: ${lugar.tipoTurismo}</p>
-            <p>Calificación: ${lugar.calificacion.toFixed(1)}/5.0</p>
-            <p>Precio: $${lugar.precio}</p>
+            <img src="${imagen}" alt="${lugar.nombre}">
+            <div class="card-recomendacion-content">
+                <h3>${lugar.nombre}</h3>
+                <p>Tipo: ${lugar.tipoTurismo}</p>
+                <p>Calificación: ${lugar.calificacion.toFixed(1)}/5.0</p>
+                <p>Precio: $${lugar.precio}</p>
+            </div>
         `;
         
         container.appendChild(card);

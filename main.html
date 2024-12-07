@@ -47,48 +47,50 @@
             <p>Ingresa las características deseadas para que TravelIA recomiende tu próximo destino</p>
         </div>
 
-        <div class="form-container">
-            <h2>Planifica tu Viaje</h2>
-            <form id="recommendationForm">
-                <label for="region">Región:</label>
-                <select name="region" id="region" required>
-                    <option value="">Selecciona una región</option>
-                    <option value="Norteamerica">Norte América</option>
-                    <option value="Centroamerica">Centro América</option>
-                    <option value="America del Sur">Sudamérica</option>
-                    <option value="America Insular">América Insular</option>
-                    <option value="Europa">Europa</option>
-                    <option value="Africa">África</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Oceania">Oceanía</option>
-                </select>
+        <div class="main-container">
+            <div class="form-container">
+                <h2>Planifica tu Viaje</h2>
+                <form id="recommendationForm">
+                    <label for="region">Región:</label>
+                    <select name="region" id="region" required>
+                        <option value="">Selecciona una región</option>
+                        <option value="Norteamerica">Norte América</option>
+                        <option value="Centroamerica">Centro América</option>
+                        <option value="America del Sur">Sudamérica</option>
+                        <option value="America Insular">América Insular</option>
+                        <option value="Europa">Europa</option>
+                        <option value="Africa">África</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Oceania">Oceanía</option>
+                    </select>
 
-                <label for="pais">País:</label>
-                <select name="pais" id="pais" required>
-                    <option value="">Primero selecciona una región</option>
-                </select>
+                    <label for="pais">País:</label>
+                    <select name="pais" id="pais" required>
+                        <option value="">Primero selecciona una región</option>
+                    </select>
 
-                <label for="tipoTurismo">Tipo de Turismo:</label>
-                <select name="tipoTurismo" id="tipoTurismo" required>
-                    <option value="">Selecciona tipo de turismo</option>
-                    <option value="Relajación">Relajación</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Cultural">Cultural</option>
-                    <option value="Histórico">Histórico</option>
-                    <option value="Espiritual">Espiritual</option>
-                    <option value="Gastronómico">Gastronómico</option>
-                    <option value="Entretenimiento">Entretenimiento</option>
-                </select>
+                    <label for="tipoTurismo">Tipo de Turismo:</label>
+                    <select name="tipoTurismo" id="tipoTurismo" required>
+                        <option value="">Selecciona tipo de turismo</option>
+                        <option value="Relajación">Relajación</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Cultural">Cultural</option>
+                        <option value="Histórico">Histórico</option>
+                        <option value="Espiritual">Espiritual</option>
+                        <option value="Gastronómico">Gastronómico</option>
+                        <option value="Entretenimiento">Entretenimiento</option>
+                    </select>
 
-                <label for="presupuesto">Presupuesto máximo ($):</label>
-                <input type="number" id="presupuesto" name="presupuesto" required min="0" step="1">
+                    <label for="presupuesto">Presupuesto máximo ($):</label>
+                    <input type="number" id="presupuesto" name="presupuesto" required min="0" step="1">
 
-                <button type="submit">Encontrar Destinos</button>
-            </form>
-        </div>
+                    <button type="submit">Encontrar Destinos</button>
+                </form>
+            </div>
 
-        <div id="recomendaciones" class="cards-container">
-            <!-- Las recomendaciones se mostrarán aquí dinámicamente -->
+            <div id="recomendaciones" class="cards-container-recomendaciones">
+                <!-- Las recomendaciones se mostrarán aquí dinámicamente -->
+            </div>
         </div>
     </main>
 

@@ -107,19 +107,34 @@ img {
     margin-bottom: 20px;
 }
 
+/* Contenedor Principal */
+.main-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px; /* Espacio entre el formulario y las recomendaciones */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    margin: 40px auto;
+    padding: 16px;
+}
+
+
 /* Formulario */
 .form-container {
-    background-color: #fff;
+    max-width: 400px;
+    width: 100%;
     padding: 30px;
-    margin: 20px auto; 
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
     text-align: center;
+    background-color: #fff;
+    margin: 20px auto; 
 }
 
 
 form {
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -157,21 +172,7 @@ form button:hover {
     text-align: center;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
 
-footer p {
-    color: #666;
-    font-size: 1em;
-}
 
 .Instruccion {
     display: flex;
@@ -200,32 +201,114 @@ footer p {
 
 @keyframes slideLeftPartial {
     from {
-        transform: translateX(0);
+        transform: translateX(-100%);
     }
     to {
-        transform: translateX(-50%);
+        transform: translateX(-70%);
+
     }
 }
+
+
+/* Contenedor de las tarjetas */
+.cards-container-recomendaciones {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 20px; /* Espacio entre tarjetas */
+}
+
+.card-recomendacion {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 150px; /* Altura fija para un diseño uniforme */
+    margin: 0; /* Sin margen */
+    padding: 0; /* Sin padding interno */
+}
+
+/* Contenedor del contenido de la tarjeta */
+.card-recomendacion-content {
+    padding: 10px; /* Espaciado interno del contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    width: 60%; /* Resto del espacio ocupado por el contenido */
+    margin: 0; /* Sin margen */
+}
+
+.card-recomendacion h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card-recomendacion p {
+    font-size: 1.1em;
+    color: #f0f0f0;
+    margin-bottom: 5px;
+}
+
+.card-recomendacion img {
+    width: 40%;  
+    height: 100%;
+    object-fit: cover;
+    margin: 0; /* Sin margen */
+    padding: 0; /* Sin padding */
+}
+
+/* Iconos */
+.card-icon-recomendacion {
+    width: 60px;  
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+
 
 /* Contenedor de tarjetas dinámicas */
 #recomendaciones {
     display: flex;
     flex-direction: column; /* Las tarjetas se apilan en columna */
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
+    gap: 16px;
+    margin: 20px auto;
     opacity: 0; /* Ocultas inicialmente */
     transform: translateY(20px); /* Ligeramente hacia abajo */
     transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Transiciones suaves */
     position: absolute; /* Posición absoluta para alinearlas a la derecha del formulario */
-    top: 740px; /* Se alinean con la parte superior del formulario */
-    left: calc(50% + 40px); /* Se colocan a la derecha del formulario (ajusta el espacio entre ambos) */
-    width: 40%; /* Controla el ancho del contenedor de las cartas */
+    left: calc(50% + -45px); /* Se colocan a la derecha del formulario (ajusta el espacio entre ambos) */
+    width: 100%; /* Controla el ancho del contenedor de las cartas */
 }
 
 #recomendaciones.visible {
     opacity: 1; /* Hacer visibles las tarjetas */
     transform: translateY(0); /* Volver a la posición original */
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    color: #666;
+    font-size: 1em;
 }
 
 /* Responsive */
