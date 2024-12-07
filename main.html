@@ -9,19 +9,34 @@
 <body>
     <header>
         <h1>TravelIA</h1>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#acercade">Acerca de</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+        
     </header>
 
     <main>
+
+        <div class="carousel">
         <div class="image-container">
             <img src="./img/img1.jpg" alt="Imagen principal">
+
+            <img src="./img/img_c1.jpg" alt="Imagen c1">
+            <img src="./img/imgn_c2.jpg" alt="Imagen c2">
+            <img src="./img/img_c3.jpg" alt="Imagen c3">
+            <img src="./img/img_c4.jpg" alt="Imagen c4">
+            <img src="./img/imgn_c5.jpg" alt="Imagen c5">
+
         </div>
+    </div>
+
+
+        <div class="descripcionTravelIA">
+            
+            <p>TravelIA consiste en una plataforma innovadora que utiliza inteligencia artificial
+                 para ofrecer recomendaciones personalizadas de lugares turísticos, adaptadas a las preferencias
+                  individuales de cada usuario. Mediante el análisis de datos sobre intereses personales, 
+                  como actividades favoritas, presupuesto y paises de interés, 
+                  TravelIA sugiere destinos ideales que se alinean con las expectativas y necesidades.</p>
+        </div>
+    
 
         <div class="cards-container">
             <div class="card">
@@ -94,9 +109,22 @@
         </div>
     </main>
 
-    <footer>
-        <p>© Equipo #n</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© TravelIA. Todos los derechos reservados 2024</p>
+            <button class="btn_Volver_Arriba" onclick="scrollToTop()">Volver arriba</button>
+            <div class="social-icons">
+                <img src="./img/icnW.png" alt="WhatsApp" class="icon">
+                <img src="./img/icnF.png" alt="Facebook" class="icon">
+                <img src="./img/icnI.png" alt="Instagram" class="icon">
+            </div>
+        </div>
     </footer>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
     <script type="module" src="js/model.js"></script>
     <script type="module" src="js/app.js"></script>
