@@ -30,6 +30,7 @@ header {
     text-transform: uppercase;
     display: flex;
     gap: 2px; /* Espaciado entre letras */
+    margin-left: 30px;
 }
 
 .logo span {
@@ -518,4 +519,5 @@ body {
     text-align: center;
     padding: 20px 0;
   }
+
   
