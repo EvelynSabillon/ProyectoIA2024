@@ -214,6 +214,7 @@ form button:hover {
 .cards-container-recomendaciones {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 20px;
     gap: 20px; /* Espacio entre tarjetas */
 }
@@ -222,13 +223,13 @@ form button:hover {
     background-color: #007bff;
     color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
     width: 100%;
-    max-width: 580px;
+    max-width: 600px;
+    height: 180px; /* Altura mínima para un diseño uniforme */
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    height: 150px; /* Altura fija para un diseño uniforme */
     margin: 0; /* Sin margen */
     padding: 0; /* Sin padding interno */
 }
@@ -238,21 +239,27 @@ form button:hover {
     padding: 10px; /* Espaciado interno del contenido */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: left;
+    overflow: auto;
+    word-wrap: break-word;
     width: 60%; /* Resto del espacio ocupado por el contenido */
     margin: 0; /* Sin margen */
 }
 
 .card-recomendacion h3 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-bottom: 10px;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    /*white-space: normal*/;
 }
 
 .card-recomendacion p {
-    font-size: 1.1em;
+    font-size: 0.9em;
     color: #f0f0f0;
-    margin-bottom: 5px;
+    margin-bottom: 0;
+    line-height: 1em;
 }
 
 .card-recomendacion img {
