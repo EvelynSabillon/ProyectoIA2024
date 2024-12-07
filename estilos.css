@@ -405,3 +405,42 @@ footer p {
     line-height: 1.6; 
     text-align: justify;
 }
+
+
+body {
+    background: linear-gradient(-45deg, #DBF3FA, #B7E9F7, #fbc2eb, #a1c4fd);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+form button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+
+.form-container {
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form input:focus, form select:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+form button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+form button {
+    background: linear-gradient(45deg, #007bff, #B7E9F7);
+    border: none;
+}
