@@ -24,10 +24,46 @@ header {
    
 }
 
+.logo {
+    font-size: 3rem; /* Ajusta el tamaño según tu diseño */
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    gap: 2px; /* Espaciado entre letras */
+}
+
+.logo span {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, sans-serif; /* Cambia la fuente si necesitas */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.letter1 { color: #d3d3d3; } /* Azul */
+.letter2 { color: #d3d3d3; } /* Verde */
+.letter3 { color: #d3d3d3; } /* Morado */
+.letter4 { color: #d3d3d3; } /* Amarillo */
+.letter5 { color: #d3d3d3; } /* Rosa intenso */
+.letter6 { color: #d3d3d3; } /* Rojo */
+.letter7 { color: #d3d3d3; } /* Púrpura oscuro */
+.letter8 { color: #d3d3d3; } /* Azul celeste */
+
+.logo {
+    display: flex;
+    align-items: center; /* Alinea el texto y la imagen verticalmente */
+    gap: 10px; /* Espacio entre las letras y la imagen */
+}
+
+.logo-image {
+    height: 60px; 
+    width: auto; 
+    
+}
+
+
 header h1 {
     font-size: 2.5em;
     margin: 40px;
     color: rgb(255, 255, 255);   
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); #ESTE
 }
 /* Contenedor principal del carrusel */
 .carousel {
@@ -407,6 +443,19 @@ footer p {
 }
 
 
+#ESRTOOOOOOOOOOOOOOOOOOOOOO
+
+body {
+    background: linear-gradient(-45deg, #DBF3FA, #B7E9F7, #fbc2eb, #a1c4fd);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
 form button:hover {
     transform: scale(1.1);
@@ -433,3 +482,4 @@ form button {
     background: linear-gradient(45deg, #007bff, #B7E9F7);
     border: none;
 }
+
