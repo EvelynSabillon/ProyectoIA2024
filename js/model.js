@@ -110,8 +110,8 @@ class TravelRecommender {
             return lugar[`region_${region}`] === 1 && 
                    lugar[`pais_${pais}`] === 1 &&
                    lugar[`ciudad_${ciudad}`] === 1 &&
-                   lugar[tipoTurismo] === 1;
-                   //lugar.Precio <= presupuesto;
+                   lugar[tipoTurismo] === 1 &&
+                   lugar.Precio <= presupuesto;
         });
 
         if (filtrados.length === 0) {
