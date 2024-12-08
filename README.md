@@ -45,7 +45,3 @@ git clone https://github.com/EvelynSabillon/ProyectoIA2024.git
 2. Si tiene **Python 3** instalado, ejecute el siguiente comando:
    ```bash
    python -m http.server 8000
-
-
- 
-
