@@ -41,7 +41,18 @@ git clone https://github.com/EvelynSabillon/ProyectoIA2024.git
 4. El proyecto se abrirá automáticamente en el navegador en `http://127.0.0.1:5500`.
 
 **Opción 2: Ejecutar un servidor local con Python**
+
 1. Abrir una terminal en la carpeta raíz del proyecto.
-2. Si tiene **Python 3** instalado, ejecute el siguiente comando:
+2. Si tiene **Python 3** instalado, ejecutar el siguiente comando:
    ```bash
    python -m http.server 8000
+   ```
+3. Abrir el navegador y dirigirse a `http://127.0.0.1:8000`.
+4. Hacer clic en la opción `main.html` dentro del directorio de archivo.
+
+### **3. Uso del proyecto**
+
+Rellene los campos solicitados dentro del formulario en la página para obtener recomendaciones.
+
+
+   
