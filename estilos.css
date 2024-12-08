@@ -192,6 +192,7 @@ form .card:hover {
 .form-container {
     max-width: 400px;
     width: 100%;
+    margin-left: 70px;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -269,7 +270,7 @@ form button:hover {
 
 @keyframes slideLeftPartial {
     from {
-        transform: translateX(-100%);
+        transform: translateX(0%);
     }
     to {
         transform: translateX(-70%);
@@ -561,7 +562,88 @@ body {
     transform: scale(1.1);
   }
 
+  .light {
+    width: 5px;
+    height: 5px;
+    background: red;
+    border-radius: 50%;
+    bottom: 50px;
+    position: absolute;
+    z-index: 10;
+    left: 20px;
+    animation: light 800ms ease-in-out 0s infinite alternate;
+  }
   
+  .cloud {
+    position: absolute;
+    opacity: 0.8;
+    z-index: 99;
+  }
+  
+.cloud1 {
+
+    top: 870px;
+    right: -500px;
+    animation: cloud 10s linear 0s infinite reverse;
+}
 
 
+.cloud2 {
+
+    top: 1550px;
+    right: -500px;
+    animation: cloud 15s linear 0s infinite reverse;
+}
+
+
+  @keyframes light {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
   
+  @keyframes cloud {
+    from { right: -500px; }
+    to { right: 102%; }
+  }
+  
+  .cloud img {
+    width: 100px; /* Ajusta el tamaño del avión */
+    height: auto;
+    position: relative;
+  }
+  
+  .nub {
+    position: absolute;
+    
+    z-index: 1;
+  }
+  
+  @keyframes nub-move {
+    from { left: 102%; }
+    to { left: -500px; }
+  }
+  
+  /* Posiciones iniciales verticales y horizontales aleatorias */
+  .nub1 {opacity: 0.5; top: 500px; left: 80%; animation: nub-move 10s linear 0s infinite;}
+  .nub2 {opacity: 0.5; top: 600px; left: 50%; animation: nub-move 11s linear 0s infinite;}
+  .nub3 {opacity: 0.5; top: 750px; left: 30%; animation: nub-move 9s linear 0s infinite;}
+  .nub4 {opacity: 0.5; top: 1000px; left: 70%; animation: nub-move 13s linear 0s infinite;}
+  .nub5 {opacity: 0.5; top: 1200px; left: 90%; animation: nub-move 8s linear 0s infinite;}
+  .nub6 {opacity: 0.1; top: 1400px; left: 90%; animation: nub-move 50s linear 0s infinite;}
+  
+  .nub img {
+    width: 150px; /* Ajusta el tamaño de las nubes */
+    height: auto;
+    position: relative;
+  }
+  
+
+  .cards {
+    position: relative;
+    z-index: 10; /* Mayor que las nubes */
+  }
+  
+  /* Fondo detrás de las nubes */
+  .background {
+    z-index: 0; /* Asegúrate de que esté detrás de todo */
+  }
