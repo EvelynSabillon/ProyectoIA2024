@@ -173,12 +173,13 @@ async function mostrarRecomendaciones(recomendaciones) {
         const card = document.createElement('div');
         card.className = 'card-recomendacion';
 
-        card.innerHTML = `
+      card.innerHTML = `
             <img src="${imagen}" alt="${lugar.nombre}">
             <div class="card-recomendacion-content">
                 <h3>${lugar.nombre}</h3>
                 <p>Tipo: ${lugar.tipoTurismo}</p>
                 <p>Calificación: ${lugar.calificacion.toFixed(1)}/5.0</p>
+                <div class="stars">${getStars(lugar.calificacion)}</div>
                 <p>Precio: $${lugar.precio}</p>
             </div>
         `;
@@ -189,6 +190,30 @@ async function mostrarRecomendaciones(recomendaciones) {
 
     // Mostrar el contenedor de recomendaciones
     container.classList.add('visible');
+}
+
+function getStars(calificacion) {
+    const fullStar = '★'; // Estrella llena
+    const halfStar = '☆'; // Estrella media
+    const emptyStar = '☆'; // Estrella vacía
+    let stars = '';
+
+    // Agregar estrellas llenas
+    for (let i = 0; i < Math.floor(calificacion); i++) {
+        stars += fullStar;
+    }
+
+    // Agregar estrella media si hay un decimal
+    if (calificacion % 1 >= 0.5) {
+        stars += halfStar; // Agrega una estrella media
+    }
+
+    // Agregar estrellas vacías
+    for (let i = Math.ceil(calificacion); i < 5; i++) {
+        stars += emptyStar;
+    }
+
+    return stars;
 }
 
 // Inicializar cuando el DOM esté listo
