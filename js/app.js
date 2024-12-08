@@ -105,40 +105,211 @@ function setupEventListeners() {
 }
 
 async function buscarImagenes(lugar, tipoTurismo, lat, lng) {
-    // 1. Verificar si tenemos URL y mostrarla para debug
+    console.log("Revisando lugar:", lugar); // Para ver qué recibimos
+
+    // 1. Verificar si hay imagen_url y si es válida
     if (lugar.image_url && lugar.image_url !== "No disponible") {
         try {
             const cleanUrl = decodeURIComponent(lugar.image_url.replace(/\\/g, ''));
-            console.log('Intentando cargar URL:', cleanUrl);
+            console.log('URL del JSON encontrada:', cleanUrl);
             
-            // Intentar acceder a la imagen primero
-            const response = await fetch(cleanUrl, {
-                method: 'HEAD',  // Solo verificar si existe
-                mode: 'no-cors'  // Importante para URLs externas
-            });
-
-            console.log('Estado de la respuesta:', response.status);
-            
-            // Si llegamos aquí, la URL es válida
+            // Remover la verificación fetch que puede estar causando el problema
             return cleanUrl;
             
         } catch (error) {
-            console.warn(`Error con la imagen original para ${lugar.Nombre}:`, error);
+            console.warn(`Error con imagen original:`, error);
         }
-    } else {
-        console.log('No hay URL de imagen para:', lugar.Nombre);
     }
 
-    // 2. Unsplash como respaldo
-    console.log('Intentando Unsplash para:', lugar.Nombre);
+    console.log('Usando Unsplash para:', lugar.nombre);
+
+    // 2. Si no hay imagen válida en el JSON, usar Unsplash
     try {
-        const query = `${lugar.Nombre} ${tipoTurismo} tourist attraction`;
-        const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${ACCESS_KEY}`;
+        // Construir una query exacta
+        const lugar_limpio = lugar.nombre
+            .replace(/[^\w\s]/gi, '') // remover caracteres especiales
+            .toLowerCase();
+            
+        let query = lugar.nombre;
+        
+        // Términos específicos para lugares famosos
+        const lugares_especificos = {
+            // Europa
+            'eiffel tower': 'Eiffel Tower Paris France landmark iconic',
+            'louvre museum': 'Louvre Museum Paris pyramid art museum',
+            'arc de triomphe': 'Arc de Triomphe Paris France monument',
+            'notre dame cathedral': 'Notre Dame Cathedral Paris Gothic architecture',
+            'sagrada familia': 'Sagrada Familia Barcelona Gaudi cathedral',
+            'park guell': 'Park Guell Barcelona Gaudi mosaic architecture',
+            'casa batllo': 'Casa Batllo Barcelona Gaudi modernist building',
+            'colosseum': 'Colosseum Rome Italy ancient amphitheater',
+            'vatican museums': 'Vatican Museums Rome Sistine Chapel art',
+            'trevi fountain': 'Trevi Fountain Rome Italy baroque fountain',
+            'pantheon rome': 'Pantheon Rome Italy ancient temple dome',
+            'big ben': 'Big Ben London Parliament iconic clock tower',
+            'tower bridge': 'Tower Bridge London Thames iconic bridge',
+            'london eye': 'London Eye Thames River observation wheel',
+            'buckingham palace': 'Buckingham Palace London royal residence',
+            'stonehenge': 'Stonehenge England prehistoric monument sunrise',
+            'acropolis athens': 'Acropolis Athens Greece Parthenon ancient',
+            'santorini': 'Santorini Greece white buildings blue domes',
+            'neuschwanstein castle': 'Neuschwanstein Castle Bavaria Germany fairytale',
+            'brandenburg gate': 'Brandenburg Gate Berlin Germany historic landmark',
+            
+            // Asia
+            'taj mahal': 'Taj Mahal Agra India marble mausoleum sunrise',
+            'great wall china': 'Great Wall of China mountains historic wall',
+            'forbidden city': 'Forbidden City Beijing China imperial palace',
+            'mount fuji': 'Mount Fuji Japan snow capped mountain landscape',
+            'shibuya crossing': 'Shibuya Crossing Tokyo Japan pedestrian crossing',
+            'tokyo tower': 'Tokyo Tower Japan red tower night illuminated',
+            'senso ji temple': 'Senso-ji Temple Asakusa Tokyo oldest temple',
+            'fushimi inari': 'Fushimi Inari Shrine Kyoto red torii gates',
+            'petronas towers': 'Petronas Towers Kuala Lumpur Malaysia twin towers',
+            'angkor wat': 'Angkor Wat Cambodia temple sunrise reflection',
+            'marina bay sands': 'Marina Bay Sands Singapore hotel infinity pool',
+            'gardens by the bay': 'Gardens by the Bay Singapore Supertree Grove',
+            'grand palace bangkok': 'Grand Palace Bangkok Thailand ornate temple',
+            'burj khalifa': 'Burj Khalifa Dubai tallest building night',
+            'palm jumeirah': 'Palm Jumeirah Dubai aerial artificial island',
+            
+            // América
+            'statue of liberty': 'Statue of Liberty New York Harbor landmark',
+            'times square': 'Times Square New York City night lights billboards',
+            'central park': 'Central Park New York aerial green space',
+            'empire state building': 'Empire State Building New York Art Deco skyscraper',
+            'brooklyn bridge': 'Brooklyn Bridge New York City suspension bridge',
+            'golden gate bridge': 'Golden Gate Bridge San Francisco fog iconic',
+            'hollywood sign': 'Hollywood Sign Los Angeles hills landmark',
+            'grand canyon': 'Grand Canyon Arizona USA natural wonder vista',
+            'niagara falls': 'Niagara Falls waterfall powerful mist',
+            'christ the redeemer': 'Christ the Redeemer Rio Janeiro Brazil statue',
+            'machu picchu': 'Machu Picchu Peru Inca ruins mountains',
+            'perito moreno': 'Perito Moreno Glacier Argentina ice nature',
+            'iguazu falls': 'Iguazu Falls Argentina Brazil waterfall nature',
+            'easter island': 'Easter Island Chile moai statues sunset',
+            
+            // África
+            'pyramids giza': 'Pyramids of Giza Egypt ancient desert sphinx',
+            'victoria falls': 'Victoria Falls Zimbabwe Zambia waterfall rainbow',
+            'table mountain': 'Table Mountain Cape Town South Africa landmark',
+            'kilimanjaro': 'Mount Kilimanjaro Tanzania Africa highest peak',
+            'medina marrakech': 'Medina of Marrakech Morocco souk market',
+            
+            // Australia y Oceanía
+            'sydney opera house': 'Sydney Opera House Australia harbour iconic',
+            'uluru': 'Uluru Ayers Rock Australia red desert sunrise',
+            'great barrier reef': 'Great Barrier Reef Australia coral aerial',
+            'twelve apostles': 'Twelve Apostles Australia rock formations coast',
+            'milford sound': 'Milford Sound New Zealand fjord nature',
+            
+            // Catedrales y Basílicas
+            'st peters basilica': 'St Peters Basilica Vatican Rome largest church',
+            'milan cathedral': 'Milan Cathedral Italy Gothic architecture',
+            'cologne cathedral': 'Cologne Cathedral Germany Gothic spires',
+            'st pauls cathedral': 'St Pauls Cathedral London dome architecture',
+            'westminster abbey': 'Westminster Abbey London Gothic church royal',
+            
+            // Museos Famosos
+            'british museum': 'British Museum London historic collection entrance',
+            'orsay museum': 'Musee d Orsay Paris France art museum clock',
+            'prado museum': 'Prado Museum Madrid Spain art gallery facade',
+            'uffizi gallery': 'Uffizi Gallery Florence Italy art museum',
+            
+            // Plazas Famosas
+            'st marks square': 'St Marks Square Venice Italy piazza basilica',
+            'red square': 'Red Square Moscow Russia Saint Basil Cathedral',
+            'dam square': 'Dam Square Amsterdam Netherlands Royal Palace',
+            'grand place brussels': 'Grand Place Brussels Belgium gothic square',
+            
+            // Castillos
+            'palace versailles': 'Palace of Versailles France royal garden',
+            'edinburgh castle': 'Edinburgh Castle Scotland fortress rock',
+            'prague castle': 'Prague Castle Czech Republic largest castle',
+            'chambord castle': 'Chateau de Chambord Loire Valley France',
+            
+            // Parques Nacionales
+            'yellowstone': 'Yellowstone National Park geysers nature USA',
+            'yosemite': 'Yosemite National Park California granite cliffs',
+            'torres del paine': 'Torres del Paine Chile mountains peaks',
+            'banff': 'Banff National Park Canada rocky mountains lake',
+            
+            // Sitios Arqueológicos
+            'petra': 'Petra Jordan Treasury ancient architecture',
+            'chichen itza': 'Chichen Itza Mexico Mayan pyramid temple',
+            'pompeii': 'Pompeii Italy Roman ruins volcano archaeology',
+            'ephesus': 'Ephesus Turkey ancient Greek Roman ruins',
+            
+            // Jardines y Parques
+            'keukenhof': 'Keukenhof Gardens Netherlands tulips spring',
+            'boboli gardens': 'Boboli Gardens Florence Italy renaissance garden',
+            'central park': 'Central Park New York City green space aerial',
+            'english garden munich': 'English Garden Munich Germany park lake',
+            
+            // Sitios Naturales
+            'northern lights': 'Aurora Borealis Iceland Northern Lights night',
+            'zhangjiajie': 'Zhangjiajie China Avatar mountains forest',
+            'salar de uyuni': 'Salar de Uyuni Bolivia salt flat reflection',
+            'blue grotto': 'Blue Grotto Capri Italy sea cave azure',
+            
+            // Modernos
+            'palm jumeirah': 'Palm Jumeirah Dubai UAE aerial island',
+            'gardens by the bay': 'Gardens by the Bay Singapore Supertree night',
+            'the shard': 'The Shard London modern architecture glass',
+            'cn tower': 'CN Tower Toronto Canada observation deck',
+            
+            // Sitios Históricos
+            'forbidden city': 'Forbidden City Beijing China imperial palace',
+            'terracotta warriors': 'Terracotta Warriors Xian China ancient army',
+            'palace of doge': 'Doges Palace Venice Italy gothic architecture',
+            'alcazar seville': 'Real Alcazar Seville Spain moorish palace',
+            
+            // Mercados
+            'grand bazaar istanbul': 'Grand Bazaar Istanbul Turkey market historic',
+            'chatuchak': 'Chatuchak Weekend Market Bangkok Thailand',
+            'borough market': 'Borough Market London food historic market',
+            'la boqueria': 'La Boqueria Barcelona Spain food market',
+            
+            // Islas
+            'santorini': 'Santorini Greece white buildings caldera sunset',
+            'bora bora': 'Bora Bora French Polynesia overwater bungalows',
+            'maldives': 'Maldives Indian Ocean overwater villas turquoise',
+            'capri': 'Capri Italy Mediterranean island blue grotto',
+            
+            // Sitios Religiosos
+            'hagia sophia': 'Hagia Sophia Istanbul Turkey mosque museum',
+            'temple of heaven': 'Temple of Heaven Beijing China architecture',
+            'golden temple': 'Golden Temple Amritsar India sikh temple',
+            'mont saint michel': 'Mont Saint Michel France abbey island',
+            
+            // Puentes Famosos
+            'charles bridge': 'Charles Bridge Prague Czech Republic historic',
+            'ponte vecchio': 'Ponte Vecchio Florence Italy medieval bridge',
+            'rialto bridge': 'Rialto Bridge Venice Italy grand canal',
+            'sydney harbour bridge': 'Sydney Harbour Bridge Australia coat hanger',
+            
+            // Otros Monumentos
+            'moai': 'Easter Island Moai statues sunset Chile',
+            'little mermaid': 'Little Mermaid Copenhagen Denmark statue',
+            'manneken pis': 'Manneken Pis Brussels Belgium fountain statue',
+            'space needle': 'Space Needle Seattle Washington landmark'
+        };
+
+        // Si es un lugar famoso, usar términos específicos
+        for (const [key, value] of Object.entries(lugares_especificos)) {
+            if (lugar_limpio.includes(key)) {
+                query = value;
+                break;
+            }
+        }
+
+        const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=5&client_id=${ACCESS_KEY}`;
         
         const response = await fetch(url);
         const data = await response.json();
         
-        if (data.results.length > 0) {
+        if (data.results && data.results.length > 0) {
+            // Tomar la primera imagen que suele ser la más relevante
             return data.results[0].urls.regular;
         }
     } catch (error) {
@@ -148,17 +319,21 @@ async function buscarImagenes(lugar, tipoTurismo, lat, lng) {
     return '/img/placeholder.jpg';
 }
 
+export default buscarImagenes;
+
 async function mostrarRecomendaciones(recomendaciones) {
     const container = document.getElementById('recomendaciones');
     container.innerHTML = '';
     
     console.log('Recomendaciones recibidas:', recomendaciones); // Para debug
-
+    
     if (recomendaciones.length === 0) {
         container.innerHTML = `
-            <div class="card">
-                <p>No se encontraron lugares que coincidan con tus criterios.</p>
-                <p>Intenta ajustando el presupuesto o cambiando el tipo de turismo.</p>
+            <div class="card-recomendacion">
+                <div class="card-recomendacion-content">
+                    <h3>No se encontraron destinos</h3>
+                    <p>Intenta ajustando los criterios de búsqueda.</p>
+                </div>
             </div>
         `;
         return;
@@ -166,26 +341,29 @@ async function mostrarRecomendaciones(recomendaciones) {
 
     // Iterar sobre las recomendaciones
     for (const lugar of recomendaciones) {
-        // Obtener la imagen del lugar
-        const imagen = await buscarImagenes(lugar);
+        try {
+            // Obtener la imagen del lugar
+            const imagen = await buscarImagenes(lugar);
 
-        // Crear la tarjeta de recomendación
-        const card = document.createElement('div');
-        card.className = 'card-recomendacion';
+            // Crear la tarjeta de recomendación
+            const card = document.createElement('div');
+            card.className = 'card-recomendacion';
 
-      card.innerHTML = `
-            <img src="${imagen}" alt="${lugar.nombre}">
-            <div class="card-recomendacion-content">
-                <h3>${lugar.nombre}</h3>
-                <p>Tipo: ${lugar.tipoTurismo}</p>
-                <p>Calificación: ${lugar.calificacion.toFixed(1)}/5.0</p>
-                <div class="stars">${getStars(lugar.calificacion)}</div>
-                <p>Precio: $${lugar.precio}</p>
-            </div>
-        `;
+            card.innerHTML = `
+                <img src="${imagen}" alt="${lugar.nombre}" onerror="this.src='/img/placeholder.jpg'">
+                <div class="card-recomendacion-content">
+                    <h3>${lugar.nombre}</h3>
+                    <p><strong>Tipo:</strong> ${lugar.tipoTurismo}</p>
+                    <p><strong>Calificación:</strong> ${getStars(lugar.calificacion)} (${lugar.calificacion.toFixed(1)})</p>
+                    <p><strong>Precio estimado:</strong> $${lugar.precio}</p>
+                </div>
+            `;
 
-        // Añadir la tarjeta al contenedor
-        container.appendChild(card);
+            // Añadir la tarjeta al contenedor
+            container.appendChild(card);
+        } catch (error) {
+            console.error(`Error al crear tarjeta para ${lugar.nombre}:`, error);
+        }
     }
 
     // Mostrar el contenedor de recomendaciones
