@@ -180,7 +180,9 @@ form .card:hover {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    position: relative;
     flex-wrap: wrap;
+    z-index: 100000
     gap: 16px; /* Espacio entre el formulario y las recomendaciones */
     max-width: 1200px; /* Ancho máximo del contenedor */
     margin: 40px auto;
@@ -569,7 +571,7 @@ body {
     border-radius: 50%;
     bottom: 50px;
     position: absolute;
-    z-index: 10;
+    z-index: 1;
     left: 20px;
     animation: light 800ms ease-in-out 0s infinite alternate;
   }
@@ -577,7 +579,7 @@ body {
   .cloud {
     position: absolute;
     opacity: 0.8;
-    z-index: 99;
+    z-index: 1;
   }
   
 .cloud1 {
@@ -647,3 +649,22 @@ body {
   .background {
     z-index: 0; /* Asegúrate de que esté detrás de todo */
   }
+
+
+  .stars {
+    font-size: 1.2em; /* Ajusta el tamaño según tu diseño */
+    color: gold; /* Color de las estrellas */
+    margin-top: 5px; /* Espacio entre la calificación y las estrellas */
+}
+
+/* Estilos para el formulario */
+#formulario {
+    background-color: white; /* Fondo blanco para el formulario */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 20px auto; /* Centrar el formulario */
+    position: relative; /* Asegúrate de que el z-index funcione */
+    z-index: 100; /* Un valor alto para que esté por encima de otros elementos */
+}
