@@ -8,17 +8,17 @@
 
 ## **Integrantes del Grupo**  
 
-1. **Fernando Jared Orellana Cabrera** (*Carnet: 20192030277*)  
+1. **Fernando Jared Orellana Cabrera** (*20192030277*)  
    - GitHub: [navarro1109](https://github.com/navarro1109)  
    - GitHub: [Frnavarroc](https://github.com/Frnavarroc)  
 
-2. **Elías Josué Lemus** (*Carnet: 20202000541*)  
+2. **Elías Josué Lemus** (*20202000541*)  
    - GitHub: [eliaslemusunah](https://github.com/eliaslemusunah)  
 
-3. **Erick Ronaldo Méndez Alvarado** (*Carnet: 20212021200*)  
+3. **Erick Ronaldo Méndez Alvarado** (*20212021200*)  
    - GitHub: [ErickRonaldo7](https://github.com/ErickRonaldo7)  
 
-4. **Evelyn Andrea Sabillón Limas** (*Carnet: 20212000317*)  
+4. **Evelyn Andrea Sabillón Limas** (*20212000317*)  
    - GitHub: [EvelynSabillon](https://github.com/EvelynSabillon)  
 
 ---
@@ -40,7 +40,7 @@ git clone https://github.com/EvelynSabillon/ProyectoIA2024.git
 3. Hacer clic derecho sobre el archivo `main.html` y seleccionar **"Open with Live Server"**.
 4. El proyecto se abrirá automáticamente en el navegador en `http://127.0.0.1:5500`.
 
-### Opción 2: Ejecutar un servidor local con Python
+**Opción 2: Ejecutar un servidor local con Python**
 1. Abrir una terminal en la carpeta raíz del proyecto.
 2. Si tiene **Python 3** instalado, ejecute el siguiente comando:
    ```bash
