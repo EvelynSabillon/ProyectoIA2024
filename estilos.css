@@ -1,9 +1,9 @@
 /* General */
 body {
-    font-family: Arial, Helvetica, sans-serif, sans-serif;
+    font-family: 'Arial, Helvetica, sans-serif, sans-serif';
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #171717;
     overflow-x: hidden;
     box-sizing: border-box; /* Incluye padding y border en el tamaño de los elementos */
 }
@@ -136,6 +136,11 @@ img {
     gap: 20px; /* Espacio entre tarjetas */
 }
 
+form .card:hover {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
 .card {
     background-color: white;
     border-radius: 10px;
@@ -242,7 +247,7 @@ form button:hover {
     justify-content: center; 
     text-align: center; 
     font-family: Arial, sans-serif;
-    color: #666;
+    color: #262626;
     margin-top: 20px;
 }
 
@@ -417,7 +422,7 @@ form button:hover {
 }
 
 footer p {
-    color: #666;
+    color: #262626;
     font-size: 1em;
 }
 
@@ -437,17 +442,18 @@ footer p {
 .descripcionTravelIA {
     margin: 40px auto; 
     max-width: 1000px; 
-    color: #808080; 
+    color: #262626; 
+    font-family: 'Varela, sans-serif;
     font-size: 16px; 
     line-height: 1.6; 
-    text-align: justify;
+    text-align: center;
 }
 
 
 #ESRTOOOOOOOOOOOOOOOOOOOOOO
 
 body {
-    background: linear-gradient(-45deg, #DBF3FA, #B7E9F7, #fbc2eb, #a1c4fd);
+    background: #171717;
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
 }
@@ -486,8 +492,8 @@ form button {
 
 body {
     font-family: "Proxima-Nova", sans-serif;
-    color: #333;
-    background-color: #f8f9fa;
+    color: #171717;
+    background-color: #dadbe4;
     line-height: 1.2;
   }
   
@@ -519,5 +525,43 @@ body {
     text-align: center;
     padding: 20px 0;
   }
+  
+  .slide-fwd-center {
+    -webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+  
+  @-webkit-keyframes slide-fwd-center {
+    0% {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    100% {
+      -webkit-transform: translateZ(160px);
+      transform: translateZ(160px);
+    }
+  }
+  
+  @keyframes slide-fwd-center {
+    0% {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    100% {
+      -webkit-transform: translateZ(160px);
+      transform: translateZ(160px);
+    }
+  }
+
+  .animate-button {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .animate-button:hover {
+    transform: scale(1.1);
+  }
+
+  
+
 
   
