@@ -104,30 +104,56 @@ function setupEventListeners() {
     });
 }
 
+async function buscarImagenes(lugar, tipoTurismo, lat, lng) {
+    // 1. Verificar si tenemos URL y mostrarla para debug
+    if (lugar.image_url && lugar.image_url !== "No disponible") {
+        try {
+            const cleanUrl = decodeURIComponent(lugar.image_url.replace(/\\/g, ''));
+            console.log('Intentando cargar URL:', cleanUrl);
+            
+            // Intentar acceder a la imagen primero
+            const response = await fetch(cleanUrl, {
+                method: 'HEAD',  // Solo verificar si existe
+                mode: 'no-cors'  // Importante para URLs externas
+            });
 
-async function buscarImagenes(lugar) {
-    const url = `https://api.unsplash.com/search/photos?page=1&query=${encodeURIComponent(lugar)}&client_id=${ACCESS_KEY}`;
-    
+            console.log('Estado de la respuesta:', response.status);
+            
+            // Si llegamos aquí, la URL es válida
+            return cleanUrl;
+            
+        } catch (error) {
+            console.warn(`Error con la imagen original para ${lugar.Nombre}:`, error);
+        }
+    } else {
+        console.log('No hay URL de imagen para:', lugar.Nombre);
+    }
+
+    // 2. Unsplash como respaldo
+    console.log('Intentando Unsplash para:', lugar.Nombre);
     try {
+        const query = `${lugar.Nombre} ${tipoTurismo} tourist attraction`;
+        const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${ACCESS_KEY}`;
+        
         const response = await fetch(url);
         const data = await response.json();
-
+        
         if (data.results.length > 0) {
-            return data.results[0].urls.small; // Retorna la URL de la primera imagen encontrada
-        } else {
-            return './img/placeholder.jpg'; // Imagen predeterminada si no hay resultados
+            return data.results[0].urls.regular;
         }
     } catch (error) {
-        console.error('Error al buscar imágenes:', error);
-        return './img/placeholder.jpg'; // Imagen predeterminada en caso de error
+        console.error('Error con Unsplash:', error);
     }
+    
+    return '/img/placeholder.jpg';
 }
-
 
 async function mostrarRecomendaciones(recomendaciones) {
     const container = document.getElementById('recomendaciones');
     container.innerHTML = '';
     
+    console.log('Recomendaciones recibidas:', recomendaciones); // Para debug
+
     if (recomendaciones.length === 0) {
         container.innerHTML = `
             <div class="card">
@@ -140,8 +166,8 @@ async function mostrarRecomendaciones(recomendaciones) {
 
     // Iterar sobre las recomendaciones
     for (const lugar of recomendaciones) {
-        // Obtener la imagen del lugar desde la API de Unsplash
-        const imagen = await buscarImagenes(lugar.nombre);
+        // Obtener la imagen del lugar
+        const imagen = await buscarImagenes(lugar);
 
         // Crear la tarjeta de recomendación
         const card = document.createElement('div');
@@ -153,7 +179,6 @@ async function mostrarRecomendaciones(recomendaciones) {
                 <h3>${lugar.nombre}</h3>
                 <p>Tipo: ${lugar.tipoTurismo}</p>
                 <p>Calificación: ${lugar.calificacion.toFixed(1)}/5.0</p>
-                <div class="stars">${getStars(lugar.calificacion)}</div>
                 <p>Precio: $${lugar.precio}</p>
             </div>
         `;
@@ -164,30 +189,6 @@ async function mostrarRecomendaciones(recomendaciones) {
 
     // Mostrar el contenedor de recomendaciones
     container.classList.add('visible');
-}
-
-function getStars(calificacion) {
-    const fullStar = '★'; // Estrella llena
-    const halfStar = '☆'; // Estrella media
-    const emptyStar = '☆'; // Estrella vacía
-    let stars = '';
-
-    // Agregar estrellas llenas
-    for (let i = 0; i < Math.floor(calificacion); i++) {
-        stars += fullStar;
-    }
-
-    // Agregar estrella media si hay un decimal
-    if (calificacion % 1 >= 0.5) {
-        stars += halfStar; // Agrega una estrella media
-    }
-
-    // Agregar estrellas vacías
-    for (let i = Math.ceil(calificacion); i < 5; i++) {
-        stars += emptyStar;
-    }
-
-    return stars;
 }
 
 // Inicializar cuando el DOM esté listo

@@ -137,9 +137,9 @@ class TravelRecommender {
                     nombre: lugar.Nombre,
                     tipoTurismo: tipoTurismo,
                     calificacion: lugar.Calificación,
-                    fotoUrl: lugar.Foto,
-                    precio: lugar.Precio
-                });
+                    precio: lugar.Precio,
+                    image_url: lugar.image_url || 'No disponible' // Condición de imágenes
+                }),
                 clustersUsados.add(lugar.cluster);
             }
         }
