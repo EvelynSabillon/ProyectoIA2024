@@ -371,11 +371,10 @@ async function mostrarRecomendaciones(recomendaciones) {
 }
 
 function getStars(calificacion) {
-    const fullStar = '★'; // Estrella llena
-    const halfStar = '☆'; // Estrella media
-    const emptyStar = '☆'; // Estrella vacía
+    const fullStar = '<span class="stars full">★</span>'; // Estrella llena
+    const halfStar = '<span class="stars half">☆</span>'; // Estrella media
+    const emptyStar = '<span class="stars empty">☆</span>'; // Estrella vacía
     let stars = '';
-
     // Agregar estrellas llenas
     for (let i = 0; i < Math.floor(calificacion); i++) {
         stars += fullStar;
